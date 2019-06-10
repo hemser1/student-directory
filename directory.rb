@@ -1,5 +1,5 @@
-
 # students moved into array
+
 def input_students
   puts "Place enter the names of the students"
   puts "To finish, just hit return twice"
@@ -13,21 +13,32 @@ def input_students
   students
 end
 
-def print_header
+def first_letter
+  puts 'Enter the first letter of the name you want?'
+  first_letter = gets.chomp
+end
+
+def header
   puts "The students of the Villians Academy"
   puts "-------------"
 end
 
-def print(students)
-  students.each.with_index(1) { |student , index|
+def each_student(students, first_letter)
+  students.select { |student| student[:name].chars.first.downcase ==
+    first_letter.downcase }
+  .each.with_index(1) { |student, index|
     puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)" }
 end
 
-def print_footer(names)
+def footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
+def run_method
 students = input_students
-print_header
-print(students)
-print_footer(students)
+header
+each_student(students, first_letter)
+footer(students)
+end
+
+run_method
