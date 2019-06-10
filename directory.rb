@@ -19,9 +19,12 @@ def header
 end
 
 def each_student(students)
-  students.select { |student| student[:name].length < 12 }
-  .each.with_index(1) { |student, index|
+  count = 0
+  while count < 1
+  students.each.with_index(1) { |student, index|
     puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)" }
+    count += 1
+  end
 end
 
 def footer(names)
