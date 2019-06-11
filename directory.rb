@@ -15,7 +15,14 @@ def input_students
     students << {name: name, hobby: hobby, country: country,
       height: height, cohort: :november}
     puts "Now we have #{students.count} students"
+    puts "Enter next students name"
     name = gets.chomp
+    puts "Enter the students hobby"
+    hobby = gets.chomp
+    puts "Enter country of birth"
+    country = gets.chomp
+    puts 'Enter their height'
+    height = gets.chomp
   end
   students
 end
@@ -29,8 +36,8 @@ def each_student(students)
   count = 0
   while count < 1
   students.each.with_index(1) { |student, index|
-    puts "#{index}. #{student[:name]}, #{student[:hobby]}, #{student[:country]},
-    #{student[:height]}, (#{student[:cohort]} cohort)" }
+    puts "#{index}. #{student[:name]}, #{student[:hobby]},
+     #{student[:country]}, #{student[:height]}, (#{student[:cohort]} cohort)" }
     count += 1
   end
 end
