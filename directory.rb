@@ -1,28 +1,43 @@
-# students moved into array
-
 def input_students
-  puts "Place enter the names of the students"
-  puts "To finish, just hit return twice"
   students = []
-  name = gets.chomp
-  puts "Enter the students hobby"
-  hobby = gets.chomp
-  puts "Enter country of birth"
-  country = gets.chomp
-  puts 'Enter their height'
-  height = gets.chomp
-  while !name.empty? do
-    students << {name: name, hobby: hobby, country: country,
-      height: height, cohort: :november}
+  cohorts = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July',
+            'August', 'September', 'October', 'November', 'December' ]
+  @input_count = 0
+  while @input_count == 0
+    puts "Welcome to the Student Directory"
+    puts "To finish, just hit return on name entry"
+    @input_count += 1
+    while @input_count > 0
+      puts "Enter student name"
+      name = gets.chomp
+      break if name.empty? == true
+      loop do
+      puts "Enter Cohort student is attending, if unknown leave blank"
+      @cohort = gets.chomp.capitalize
+        if @cohort.empty? == true
+          @cohort = 'November'
+          break
+        elsif cohorts.include? @cohort
+          break if true
+        else
+          puts "Unknown Cohort, please enter actual month"
+        end
+      end
+      puts "Enter the students hobby"
+      hobby = gets.chomp
+      puts "Enter country of birth"
+      country = gets.chomp
+      puts 'Enter their height'
+      height = gets.chomp
+      students << {name: name, hobby: hobby, country: country,
+        height: height, cohort: @cohort}
+      @input_count += 1
+    end
+  end
+  if @input_count == 2
+    puts "Now we have #{students.count} student"
+  else
     puts "Now we have #{students.count} students"
-    puts "Enter next students name"
-    name = gets.chomp
-    puts "Enter the students hobby"
-    hobby = gets.chomp
-    puts "Enter country of birth"
-    country = gets.chomp
-    puts 'Enter their height'
-    height = gets.chomp
   end
   students
 end
@@ -36,10 +51,9 @@ def each_student(students)
   count = 0
   while count < 1
   students.each.with_index(1) { |student, index|
-    puts "#{index}.
-    #{student[:name].center(4)}
+    puts "#{index}.  #{student[:name].center(5)}
     #{student[:hobby].center(4)}
-    #{student[:country].center(4)}
+    #{student[:country].center(3)}
     #{student[:height].center(4)}
     (#{student[:cohort]} cohort)".center(4) }
     count += 1
@@ -47,7 +61,11 @@ def each_student(students)
 end
 
 def footer(names)
-  puts "Overall, we have #{names.count} great student(s)"
+  if @input_count == 2
+  puts "Overall, we have #{names.count} great student"
+  else
+  puts "Overall, we have #{names.count} great students"
+  end
 end
 
 def run_method
