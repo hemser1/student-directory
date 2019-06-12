@@ -1,28 +1,38 @@
+@students = []
+
 def interactive_menu
-  students = []
   loop do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    selection = gets.chomp
-    case selection
-    when "1"
-      students = input_students
-    when "2"
-      header
-      each_student(students)
-      footer(students)
-    when "9"
-      exit
-    else
-      puts "I don't know what you meant, try again"
-    end
+    print_menu
+    process(gets.chomp)
   end
 end
 
+def process(selection)
+  case selection
+  when "1"
+    @students = input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else
+    puts "I don't know what you meant, try again"
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  header
+  print_student_list
+  footer
+end
 
 def input_students
-  students = []
   cohorts = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July',
             'August', 'September', 'October', 'November', 'December' ]
   @input_count = 0
@@ -52,17 +62,17 @@ def input_students
       country = gets.strip
       puts 'Enter their height'
       height = gets.strip
-      students << {name: name, hobby: hobby, country: country,
+      @students << {name: name, hobby: hobby, country: country,
         height: height, cohort: @cohort}
       @input_count += 1
     end
   end
   if @input_count == 2
-    puts "Now we have #{students.count} student"
+    puts "Now we have #{@students.count} student"
   else
-    puts "Now we have #{students.count} students"
+    puts "Now we have #{@students.count} students"
   end
-  students
+  @students
 end
 
 def header
@@ -70,13 +80,13 @@ def header
   puts "-------------"
 end
 
-def each_student(students)
-  students.sort_by do |student|
+def print_student_list
+  @students.sort_by do |student|
     student[:cohort]
   end
   count = 0
   while count < 1
-  students.each.with_index(1) { |student, index|
+  @students.each.with_index(1) { |student, index|
     puts "#{index}.  #{student[:cohort].center(4)} Cohort
     #{student[:name].center(5)}
     #{student[:hobby].center(4)}
@@ -86,11 +96,11 @@ def each_student(students)
   end
 end
 
-def footer(students)
+def footer
   if @input_count == 2
-  puts "Overall, we have #{students.count} great student"
+  puts "Overall, we have #{@students.count} great student"
   else
-  puts "Overall, we have #{students.count} great students"
+  puts "Overall, we have #{@students.count} great students"
   end
 end
 
