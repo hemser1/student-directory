@@ -17,23 +17,32 @@ def input_students
   students
 end
 
-def print_header
+def print_header(students)
+  if students.count == 0
+    return nil
+  end
   puts "The students of my cohort at Makers Academy"
   puts "-------------"
 end
 
 def print(students)
+  if students.count == 0
+    return nil
+  end
   students.each do |student|
     puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
 def print_footer(students)
+  if students.count == 0
+    return nil
+  end
   puts "Overall, we have #{students.count} great students"
 end
 
 
 students = input_students
-print_header
+print_header(students)
 print(students)
 print_footer(students)
