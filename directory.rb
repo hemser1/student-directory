@@ -9,11 +9,11 @@ def input_students
     @input_count += 1
     while @input_count > 0
       puts "Enter student name"
-      name = gets.chomp
+      name = gets.strip
       break if name.empty? == true
       loop do
       puts "Enter Cohort student is attending, if unknown leave blank"
-      @cohort = gets.chomp.capitalize
+      @cohort = gets.strip.capitalize
         if @cohort.empty? == true
           @cohort = 'November'
           break
@@ -24,11 +24,11 @@ def input_students
         end
       end
       puts "Enter the students hobby"
-      hobby = gets.chomp
+      hobby = gets.strip
       puts "Enter country of birth"
-      country = gets.chomp
+      country = gets.strip
       puts 'Enter their height'
-      height = gets.chomp
+      height = gets.strip
       students << {name: name, hobby: hobby, country: country,
         height: height, cohort: @cohort}
       @input_count += 1
@@ -54,7 +54,7 @@ def each_student(students)
   count = 0
   while count < 1
   students.each.with_index(1) { |student, index|
-    puts "#{index}.  #{student[:cohort].center(4)} cohort
+    puts "#{index}.  #{student[:cohort].center(4)} Cohort
     #{student[:name].center(5)}
     #{student[:hobby].center(4)}
     #{student[:country].center(3)}
