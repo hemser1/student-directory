@@ -48,14 +48,17 @@ def header
 end
 
 def each_student(students)
+  students.sort_by do |student|
+    student[:cohort]
+  end
   count = 0
   while count < 1
   students.each.with_index(1) { |student, index|
-    puts "#{index}.  #{student[:name].center(5)}
+    puts "#{index}.  #{student[:cohort].center(4)} cohort
+    #{student[:name].center(5)}
     #{student[:hobby].center(4)}
     #{student[:country].center(3)}
-    #{student[:height].center(4)}
-    (#{student[:cohort]} cohort)".center(4) }
+    #{student[:height].center(4)}" }
     count += 1
   end
 end
