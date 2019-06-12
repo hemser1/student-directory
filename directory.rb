@@ -52,10 +52,10 @@ def process(selection)
 end
 
 def print_menu
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "3. Save the list to file"
-  puts "4. Load the list of file"
+  puts "1. Input students manually"
+  puts "2. Show the Students Directory"
+  puts "3. Save the Students Directory to file"
+  puts "4. Load the CSV file of students"
   puts "9. Exit"
 end
 
