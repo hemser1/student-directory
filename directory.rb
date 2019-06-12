@@ -1,3 +1,26 @@
+def interactive_menu
+  students = []
+  loop do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    selection = gets.chomp
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      header
+      each_student(students)
+      footer(students)
+    when "9"
+      exit
+    else
+      puts "I don't know what you meant, try again"
+    end
+  end
+end
+
+
 def input_students
   students = []
   cohorts = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July',
@@ -63,19 +86,12 @@ def each_student(students)
   end
 end
 
-def footer(names)
+def footer(students)
   if @input_count == 2
-  puts "Overall, we have #{names.count} great student"
+  puts "Overall, we have #{students.count} great student"
   else
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{students.count} great students"
   end
 end
 
-def run_method
-students = input_students
-header
-each_student(students)
-footer(students)
-end
-
-run_method
+interactive_menu
