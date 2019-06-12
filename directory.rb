@@ -1,10 +1,22 @@
 require 'pry'
 @students = []
 
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, filename doesn't exist."
+    exit
+  end
+end
+
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -50,8 +62,8 @@ def save_students
     file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, hobby, country, height, cohort = line.chomp.split(',')
     @students << {name: name, hobby: hobby, country: country,
@@ -70,11 +82,11 @@ def input_students
     @input_count += 1
     while @input_count > 0
       puts "Enter student name"
-      name = gets.strip
+      name = STDIN.gets.chomp
       break if name.empty? == true
       loop do
       puts "Enter Cohort student is attending, if unknown leave blank"
-      @cohort = gets.strip.capitalize
+      @cohort = STDIN.gets.chompcapitalize
         if @cohort.empty? == true
           @cohort = 'November'
           break
@@ -85,11 +97,11 @@ def input_students
         end
       end
       puts "Enter the students hobby"
-      @hobby = gets.strip
+      @hobby = STDIN.gets.chomp
       puts "Enter country of birth"
-      @country = gets.strip
+      @country = STDIN.gets.chomp
       puts 'Enter their height'
-      @height = gets.strip
+      @height = STDIN.gets.chomp
       @students << {name: name, hobby: @hobby, country: @country,
         height: @height, cohort: @cohort}
       @input_count += 1
@@ -132,4 +144,5 @@ def footer
   end
 end
 
+try_load_students
 interactive_menu
